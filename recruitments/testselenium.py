@@ -39,6 +39,9 @@ for i in edities:
     elif i.get_attribute("name") == "phoneNumber":
         i.send_keys("123456789")
 
+submit_button = driver.find_element(by=By.CLASS_NAME, value="btn.center-block.form-btn")
+submit_button.click()
+
 time.sleep(3)
 
-# driver.quit()
+driver.quit()
