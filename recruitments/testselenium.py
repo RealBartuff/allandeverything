@@ -1,0 +1,2 @@
+# SALESmanago recruitment task
+
