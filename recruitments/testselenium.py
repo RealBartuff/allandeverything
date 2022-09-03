@@ -2,7 +2,6 @@
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
 import time
 
 PATH = "C:\Program Files (x86)\chromedriver.exe"
@@ -17,13 +16,29 @@ for elem in sources:
 
 ebooks = resources.find_element(by=By.CLASS_NAME, value="category__item").get_attribute("href")
 driver.get(ebooks)
+
 get_ebook = driver.find_elements(by=By.CLASS_NAME, value="col-lg-3.ebook__text")
 for ebook in get_ebook:
     one = ebook.find_element(by=By.TAG_NAME, value="a").get_attribute("href")
     if "online_consumer" in one:
-        print(one)
+        form = one
+        break
 
+driver.get(form)
+
+edities = driver.find_elements(by=By.CLASS_NAME, value="form-control")
+for i in edities:
+    if i.get_attribute("name") == "name":
+        i.send_keys("Bartłomiej Debowski")
+    elif i.get_attribute("id") == "email":
+        i.send_keys("bartlomiej.debowski@salesmanago.com")
+    elif i.get_attribute("name") == "company":
+        i.send_keys("SALESmanago")
+    elif i.get_attribute("name") == "url":
+        i.send_keys("www.salesmanago.pl")
+    elif i.get_attribute("name") == "phoneNumber":
+        i.send_keys("123456789")
 
 time.sleep(3)
 
-driver.quit()
+# driver.quit()
