@@ -9,21 +9,30 @@ PATH = os.path.join(os.path.expanduser('~'), 'PycharmProjects', 'chromedriver')
 website = "http://www.salesmanago.com"
 
 
-class SalesmanagoComSearch(unittest.TestCase):
+class PythonOrgSearch(unittest.TestCase):
 
     def setUp(self):
         self.driver = webdriver.Chrome(service=Service(PATH))
         self.driver.get(website)
 
-    def test_download_ebook(self):
-        main_page = page.MainPage()
-        main_page.search_text_element = "data-number"
+    def test_search_in_python_org(self):
+        """Tests python.org search feature. Searches for the word "pycon" then
+        verified that some results show up.  Note that it does not look for
+        any particular text in search results page. This test verifies that
+        the results were not empty."""
+
+        #Load the main page. In this case the home page of Python.org.
+        main_page = page.MainPage(self.driver)
+        #Checks if the word "Python" is in title
+        # self.assertTrue(main_page.is_title_matches(), "python.org title doesn't match.")
+        #Sets the text of search textbox to "pycon"
+        main_page.search_text_element = "https://www.salesmanago.com/info/knowledgecenter.htm"
         main_page.click_go_button()
-        search_result_page = page.SearchResultPage(self.driver)
-        assert search_result_page.is_results_found()
+        # search_results_page = page.SearchResultsPage(self.driver)
+        # Verifies that the results page is not empty
+        # self.assertTrue(search_results_page.is_results_found(), "No results found.")
 
     def tearDown(self):
-        time.sleep(5)
         self.driver.close()
 
 
