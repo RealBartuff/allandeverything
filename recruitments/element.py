@@ -9,7 +9,7 @@ class BasePageElement(object):
         """Sets the text to the value supplied"""
 
         driver = obj.driver
-        WebDriverWait(driver, 100).until(
+        WebDriverWait(driver, 15).until(
             lambda driver: driver.find_element(by=By.NAME, value=self.locator))
         driver.find_element(by=By.NAME, value=self.locator).clear()
         driver.find_element(by=By.NAME, value=self.locator).send_keys(value)
