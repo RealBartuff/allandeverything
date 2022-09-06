@@ -1,8 +1,9 @@
 from element import BasePageElement
 from locators import MainPageLocators
+from selenium.webdriver.common.by import By
 
 
-class SearchTextElement(BasePageElement):
+class SearchSourceElement(BasePageElement):
     """This class gets the search text from the specified locator"""
 
     # The locator for search box where search string is entered
@@ -19,14 +20,12 @@ class BasePage(object):
 
 class MainPage(BasePage):
 
-    search_text_element = SearchTextElement()
+    search_source_element = SearchSourceElement()
 
-    def click_go_button(self):
+    def locate_ebooks(self):
         """Triggers the search"""
-        hoover = self.driver.find_element(*MainPageLocators.SOURCES_BUTTON)
-        print(hoover)
-        element = self.driver.find_element(*MainPageLocators.EBOOKS_BUTTON)
-        element.click()
+        location = self.driver.find_element(*MainPageLocators.EBOOKS_BUTTON)
+        location.click()
 
 
 class SearchResultsPage(BasePage):

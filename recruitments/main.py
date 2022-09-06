@@ -19,8 +19,11 @@ class SalesmanagoComSearch(unittest.TestCase):
     def test_search_in_salesmanago_com(self):
 
         main_page = page.MainPage(self.driver)
-        main_page.search_text_element = "https://www.salesmanago.com/info/knowledgecenter.htm"
-        main_page.click_go_button()
+        x = main_page.search_source_element
+        x.locate_ebooks()
+        search_results_page = page.SearchResultsPage(self.driver)
+        # Verifies that the results page is not empty
+        self.assertTrue(search_results_page.is_results_found(), "No results found.")
 
     def tearDown(self):
         self.driver.close()
